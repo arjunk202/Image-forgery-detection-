@@ -1,0 +1,371 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFD - Homepage</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body id="style-2">
+
+    <div class="container">
+
+        <div class="login-wrapper">
+            <div class="main">
+                <h2 style="position: absolute;top: 20px;right: 20px;color: black;z-index: 100;font-size: 15px;" onclick="closeLogin()"><i class="fa-solid fa-x"></i></h2>
+                <img src="{% static 'images/81562-job-hunt-concept (1).gif' %}" alt="" style="width: 190px;margin-top:25px;transform: rotate(0deg); margin-bottom: 28px;">
+                <h1 style="color: black;font-size: 18px;margin-bottom: 20px;">Signin</h1>
+                <p>Login into your account now</p>
+        
+                <div class="inputs">
+                    <input type="text" placeholder="username" class="userName" style="margin-bottom: 10px;width: 330px;"><br>
+                    <input type="password" placeholder="password" class="password" style="width: 330px;margin-top: 15px;"><br>
+                </div>
+                <p style="display: none;justify-content: center;align-items: center;width: 100%;margin-top: 25px;opacity: 1;margin-bottom: 10px;" class="error">Invalid login credentials</p>
+    
+                <button onclick="sendData()">Login into my account &nbsp&nbsp&nbsp<i class="fa-solid fa-right-to-bracket"></i></button>
+            </div>
+        </div>
+    
+        <div class="signup-wrapper">
+            <div class="main" style="width: 350px;">
+                <h2 style="position: absolute;top: 20px;right: 20px;color: black;font-size: 15px;" onclick="closeSignup()"><i class="fa-solid fa-x"></i></ion-icon></h2>
+                <img src="{% static 'images/81562-job-hunt-concept (1).gif' %}" alt="" style="width: 190px;margin-top:25px;transform: rotate(0deg); margin-bottom: 28px;">
+                <h1  style="color: black;font-size: 18px;margin-bottom: 20px;">Signup</h1>
+                <p>Create your new account now</p>
+        
+                <div class="inputs inps">
+                    <input type="text" placeholder="username" class="username1"><br>
+                    <input type="email" placeholder="email address" class="email1"><br>
+                    <input type="number" placeholder="phone number" class="phone">
+                    <!-- <input type="text" placeholder="Address" class="address"><br> -->
+    
+                    <input type="password" placeholder="password" class="password1"><br>
+                </div>
+                <p style="margin-top: -7px;color: rgb(9, 9, 9);opacity: 0.7;width: 100%;text-align: center;display: none;font-size: 15px;justify-content: center;align-items: center;margin-bottom: 15px;margin-top: 15px;" class="err2">Username already exists</p>
+    
+                <button onclick="checkSignup()">Create a new account account &nbsp&nbsp&nbsp<i class="fa-solid fa-user-plus"></i></button>
+            </div>
+        </div>
+
+        <div class="navbar">
+
+            <div class="top">
+                <h1>IFD</h1>
+            </div>
+
+            <div class="links">
+                <h3>Home</h3>
+                <h3>About</h3>
+                <h3>Docs</h3>
+                {% if not request.user.is_authenticated %}
+                <h3 onclick="showLogin()">Login</h3>
+                <h3 onclick="showSignup()">Signup</h3>
+                {% else %}
+                <h3 >Image Foregery</h3>
+                <a href="{% url 'logout' %}" style="text-decoration: none;"><h3 >Logout</h3></a>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="banner">
+            <div class="writing-background">
+                <img src="{% static 'images/images.jpg' %}" alt="">
+                <div class="writing">
+                    <h1>Image 🖼️ <br>
+                        Forgery Detection 🔍<br>
+                        </h1>
+                    <p style="margin-top: 10px;">Image forgery means manipulation of the digital image to conceal some meaningful or useful information of the image.</p> 
+                          
+                </div>
+            </div>    
+            <div>
+                <img src="{% static 'images/29481-kanban-image-animation.gif' %}" id="imaging" alt="">
+
+            </div>
+        </div>
+        {% if not request.user.is_authenticated %}
+        <div class="btngroup">
+            <div class="btn-icon">
+                <button style="background-color: #0284c7;font-size: 16px;width: 300px;border-radius: 5px;" onclick="showLogin()">Login in to my account &nbsp&nbsp&nbsp<i class="fa-solid fa-right-to-bracket"></i></button>
+                
+            </div>
+            <div class="btn-icon1">
+                <button style="background-color: #fdfdfd;margin-left: 25px;font-size: 16px;border: 1px solid rgb(227, 227, 227);border-radius: 5px;width: 300px;" onclick="showSignup()">Create a new account &nbsp&nbsp&nbsp<i class="fa-solid fa-user-plus"></i></button>
+                <!-- <h3></h3> -->
+            </div>
+        </div> 
+        {% else %}
+        <div class="btngroup">
+            <div class="btn-icon">
+                <button style="background-color: #0284c7;font-size: 16px;width: 300px;border-radius: 5px;" onclick="showLogin()">Image Forgery Detection &nbsp&nbsp&nbsp <i class="fa-solid fa-image"></i></button>
+                
+            </div>
+            <div class="btn-icon1">
+                <a href="{% url 'logout' %}"><button style="background-color: #fdfdfd;margin-left: 25px;font-size: 16px;border: 1px solid rgb(227, 227, 227);border-radius: 5px;width: 300px;" >Logout of my account &nbsp&nbsp&nbsp<i class="fa-solid fa-right-to-bracket"></i></button></a>
+                <!-- <h3></h3> -->
+            </div>
+        </div> 
+        {% endif %} 
+        <div style="background-color: rgb(255, 255, 255);margin-top: 50px;padding-top: 50px;margin-bottom: 92px;">
+            <!-- <center><h1 style="font-size: 45px;">🖼️</h1></center> -->
+        <h1 style="width: 100%;text-align: center;font-weight: 600;">Image Forgery Detection Using <span style="color: #0284c7;"><br>Machine Learning</span> </h1>
+            <div class="details" style="margin-top: 25px;">
+                <img src="{% static 'images/107508-saas-dashboard.gif' %}" alt="">
+                <div class="detail">
+                    <h2>What we do?</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime incidunt enim aliquid impedit odit, architecto quasi nostrum, deserunt magnam alias consequatur est molestias ex voluptas! Consequatur minima corporis minus fugit.</p>
+                </div>
+            </div>
+        </div>
+
+        <h1 style="width: 100%;text-align: center;font-weight: 600;margin-top: 25px;">Our <span style="color: #0284c7;">Team</span> </h1>
+        <p style="opacity: 0.8;text-align: center;margin-top: 8px;margin-bottom: 25px;">"Alone we can do so little; together we can do so much."</p>
+
+        <div class="members">
+            <div class="member">
+                <img src="{% static 'images/mem1.jpg' %}" alt="">
+                <h3>David</h3>
+                <p>Backend developer</p>
+            </div>
+            <div class="member">
+                <img src="{% static 'images/mem2.jpg' %}" alt="">
+                <h3>Jhon</h3>
+                <p>Backend developer</p>
+            </div>
+            <div class="member">
+                <img src="{% static 'images/mem3.jpg' %}" alt="">
+                <h3>Harry</h3>
+                <p>Fronted developer</p>
+            </div>
+            <div class="member">
+                <img src="{% static 'images/mem1.jpg' %}" alt="">
+                <h3>Tony</h3>
+                <p>Fronted developer</p>
+            </div>
+        </div>
+
+    </div>
+    
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+    <script>
+        function sendData(){
+            
+            
+            var data = new FormData()
+    
+            data.append("username", document.querySelector('.userName').value)
+            data.append("password", document.querySelector('.password').value)
+    
+            
+    
+            data.append("csrfmiddlewaretoken",'{{ csrf_token }}')
+            
+            $.ajax({
+    
+                method:"POST",
+                url:'/checkLogin/',
+                processData:false,
+                contentType:false,
+                // MimeType:"multipart/form-data",
+                data:data,
+                success:function(res){
+                    localStorage.setItem("message",res.message)
+    
+                    if(res.message === 0){
+                        
+                        login(data)
+                        localStorage.setItem("username",document.querySelector('.userName').value)
+                        localStorage.setItem('password',document.querySelector('.password').value)
+                        // location.reload();
+                        
+                    }
+                    else{
+                        document.querySelector('.error').style.display = "flex"
+                        
+                    }
+                    
+    
+                }
+            })
+        }
+    
+        function login(data){
+    
+    
+            $.ajax({
+    
+                method:"POST",
+                url:'/login/',
+                processData:false,
+                contentType:false,
+                MimeType:"multipart/form-data",
+                data:data,
+                success:function(res){
+                    console.log("it worked :)")
+                    history.back()
+                    setTimeout(()=>{
+    
+                        location.reload();
+                    },1000)
+                }
+                })
+        }
+    
+        function signup(data){
+            console.log("888888888");
+            $.ajax({
+    
+                method:"POST",
+                url:'/register/',
+                processData:false,
+                contentType:false,
+                MimeType:"multipart/form-data",
+                data:data,
+                success:function(res){
+                    history.back()
+                    history.back()
+                    setTimeout(()=>{
+    
+                        location.reload();
+    
+                    },1000)
+                }
+                })
+    
+        }
+    
+        function checkSignup(){
+            var data = new FormData()
+    
+            data.append("username", document.querySelector('.username1').value)
+            data.append("email", document.querySelector('.email1').value)
+            data.append("password", document.querySelector('.password1').value)
+            data.append("phone", document.querySelector('.phone').value)
+           
+            data.append("csrfmiddlewaretoken",'{{ csrf_token }}')
+    
+            
+            $.ajax({
+    
+                method:"POST",
+                url:'/checkSignup/',
+                processData:false,
+                contentType:false,
+                // MimeType:"multipart/form-data",
+                data:data,
+                success:function(res){
+                    // localStorage.setItem("message",res.message)
+    
+                    if(res.message === 0){
+                        
+    
+                            // alert("Valid email address!");
+                            
+                            var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    
+                            if (document.querySelector('.email1').value.match(validRegex)) {
+                                document.querySelector('.err2').style.display = "none"
+                                // alert("Valid email address!");
+                                error = 0
+                                console.log("");
+    
+                            } else {
+    
+                                alert("Invalid email address!");
+                                error = 1
+                                
+    
+                            }
+    
+                            if (document.querySelector('.username1').value == "") {
+    
+    // alert("Valid email address!");
+                            error = 1
+                            alert("please enter a valid username!");
+                            document.querySelector('.err2').style.display = "none"
+    
+    
+                            } else {
+    
+                                console.log("");
+                                error = 0
+    
+                            }
+    
+                            if (document.querySelector('.phone').value == "") {
+    
+    // alert("Valid email address!");
+                            error = 1
+                            alert("please enter phone number!");
+                            document.querySelector('.err2').style.display = "none"
+    
+    
+                            } else {
+    
+                                console.log("");
+                                error = 0
+    
+                            }
+    
+                            if (document.querySelector('.password1').value == "" ) {
+    
+                                alert("please fill the password!");
+                                document.querySelector('.err2').style.display = "none"
+                                error = 1
+                                } 
+                                
+                                else if(document.querySelector('.password1').value.length < 7){
+    
+                                alert("password length must be greater than 7");
+                                document.querySelector('.err2').style.display = "none"
+                                error = 1
+    
+    
+                                }
+    
+                                else{
+                                    error = 0
+                                    
+                                }
+    
+                                
+                            
+    
+                        
+                        
+                        // localStorage.setItem("username",document.querySelector('.username').value)
+                        // localStorage.setItem('password',document.querySelector('.password').value)
+                        // location.reload();
+                        
+                    }
+                    else{
+                        
+    
+                        document.querySelector('.err2').style.display = "flex"
+    
+                    }
+    
+                    if(error == 0){
+                                    signup(data)
+                                }
+                    
+    
+                }
+            })
+        }
+    
+        
+    
+     
+    
+    
+    </script>
+</body>
+</html>
